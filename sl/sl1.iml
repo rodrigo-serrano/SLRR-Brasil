@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Scripts/game/src" isTestSource="false" packagePrefix="java.game" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="DS_vw_audi_seat_headpack" />
+    <orderEntry type="module" module-name="camshaft" />
+    <orderEntry type="module" module-name="scripts2" />
+    <orderEntry type="module" module-name="camshaft1" />
+    <orderEntry type="module" module-name="reciprocatingenginepart" />
+    <orderEntry type="module" module-name="block1" />
+    <orderEntry type="module" module-name="bodypart1" />
+    <orderEntry type="module" module-name="scripts3" />
+    <orderEntry type="module" module-name="util" />
+    <orderEntry type="module" module-name="osd" />
+    <orderEntry type="module" module-name="slidingenginepart2" />
+    <orderEntry type="module" module-name="io1" />
+    <orderEntry type="module" module-name="LDelta_Engine" />
+    <orderEntry type="module" module-name="enginepart" />
+    <orderEntry type="module" module-name="dialog1" />
+    <orderEntry type="module" module-name="bodypart" />
+    <orderEntry type="module" module-name="reciprocatingenginepart1" />
+    <orderEntry type="module" module-name="util1" />
+    <orderEntry type="module" module-name="io" />
+    <orderEntry type="module" module-name="slidingenginepart1" />
+    <orderEntry type="module" module-name="enginepart1" />
+    <orderEntry type="module" module-name="DS_LGT_headcovers" />
+    <orderEntry type="module" module-name="JZ_Mufflers" />
+    <orderEntry type="module" module-name="dialog" />
+    <orderEntry type="module" module-name="render1" />
+    <orderEntry type="module" module-name="reciprocatingrgearpart1" />
+    <orderEntry type="module" module-name="scripts1" />
+    <orderEntry type="module" module-name="render" />
+    <orderEntry type="module" module-name="block" />
+    <orderEntry type="module" module-name="enginepart2" />
+    <orderEntry type="module" module-name="bodypart2" />
+    <orderEntry type="module" module-name="osd1" />
+    <orderEntry type="module" module-name="rgearpart" />
+    <orderEntry type="module" module-name="LDelta_ProKits" />
+  </component>
+</module>
