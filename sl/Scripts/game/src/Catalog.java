@@ -476,11 +476,7 @@ public class Catalog extends GameType implements GameState
 		Menu m;
 
 		//always visible objects:
-//		moneytxt=osd.createText( null, Frontend.mediumFont, Text.ALIGN_CENTER,	0.50, -0.94 );
-		moneytxt = osd.createText(null, Frontend.largeFont_strong, Text.ALIGN_CENTER,	0.50, -0.975);
-//		moneytxt.setColor(Palette.RGB_BLACK);
-		sectionstxt = osd.createText(null, Frontend.largeFont_strong, Text.ALIGN_LEFT, -0.98, -0.98); //RAXAT: v2.3.1, additional informer for sections
-//		sectionstxt.setColor(Palette.RGB_RED);
+		moneytxt=osd.createText( null, Frontend.mediumFont, Text.ALIGN_CENTER,	0.50, -0.94 );
 		osd.endGroup();
 
 		//----------------------------------------Grand Index
