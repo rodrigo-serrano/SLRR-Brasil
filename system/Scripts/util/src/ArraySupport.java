@@ -5,7 +5,7 @@ import java.game.parts.bodypart.Chassis;
 import java.io.*;
 import java.util.*;
 
-public class ArraySupport extends GameType
+public class ArrayHelper extends GameType
 {
 
     public static void sortByValue(Vector vehicles) {
