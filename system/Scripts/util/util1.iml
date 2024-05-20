@@ -11,5 +11,7 @@
     <orderEntry type="module" module-name="io1" />
     <orderEntry type="module" module-name="render1" />
     <orderEntry type="module" module-name="io" />
+    <orderEntry type="module" module-name="bodypart" />
+    <orderEntry type="module" module-name="sl" />
   </component>
 </module>

@@ -41,5 +41,6 @@
     <orderEntry type="module" module-name="osd1" />
     <orderEntry type="module" module-name="rgearpart" />
     <orderEntry type="module" module-name="LDelta_ProKits" />
+    <orderEntry type="module" module-name="sl" />
   </component>
 </module>

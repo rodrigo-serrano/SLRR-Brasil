@@ -136,7 +136,7 @@ public class Catalog extends GameType implements GameState
 	final static int CMD_PREVPARTPAGE =95;
 	final static int CMD_NEXTPARTPAGE =96;
 
-// Chassis shop
+	// Chassis shop
 	final static int CMD_VEHICLE =100;
 	final static int CMD_VEH0	 =101;
 	final static int CMD_VEH1	 =102;
@@ -270,7 +270,7 @@ public class Catalog extends GameType implements GameState
 		inventory.update();
 		inventory.show();
 	}
-	
+
 	public void collectObjects( GameRef root )
 	{
 		collectObjects( root, null, null, null, null);
@@ -325,7 +325,7 @@ public class Catalog extends GameType implements GameState
 					InventoryItem_Folder tmp = new InventoryItem_Folder( inventory );
 					tmp.set = set;
 					set.build( tmp.inv );
-					inventory.items.addElement( tmp ); 
+					inventory.items.addElement( tmp );
 				}
 				else
 				{	//dummy eloszto node!
@@ -339,7 +339,7 @@ public class Catalog extends GameType implements GameState
 							{
 								int	carPack;
 								int packId = parts.id() >> 16;
-	
+
 								for( int i=carTypes.length-1; i>=0; i-- )
 								{
 									if( packId == carTypes[i].id()>>16 )
@@ -348,7 +348,7 @@ public class Catalog extends GameType implements GameState
 										break;
 									}
 								}
-								
+
 								if( !carPack || packId == currentCarPackId )
 									collector.addElement( parts );
 								//
@@ -378,7 +378,7 @@ public class Catalog extends GameType implements GameState
 		{
 			//a gomb tipus (nagy)
 			RenderRef	base = new RenderRef( frontend:0x00AEr );
-	
+
 			if( max > showDecals+i )
 			{
 				curDecals[i] = decals.elementAt( showDecals+i );
@@ -423,9 +423,9 @@ public class Catalog extends GameType implements GameState
 	{
 		CarScene = new GroundRef( Maps.Addon_Maps.Home:0x00000001r );
 		//CarScene = new Dummy( WORLDTREEROOT );
-		
+
 		CurrentCar = new Vehicle();
-		
+
 		CarViewport = new Viewport( 5, 0.0, 0.1245, 1.00, 0.7519 );
 		CarViewport.activate( Viewport.RENDERFLAG_CLEARDEPTH | Viewport.RENDERFLAG_CLEARTARGET );
 		//Cam = new Camera( CarScene, CarViewport, 0 );
@@ -435,13 +435,13 @@ public class Catalog extends GameType implements GameState
 		//cam.command( "look " + player.car.id() + " " + "0,0,0" + " 0,0,0" );
 		Cam.command( "look " + CurrentCar.id() + " 0.3,-0.6,0" );
 		Cam.command( "zoom 25 60");
-			
+
 		RenderRef CarSun = new RenderRef(misc.garage:0x001Dr);
 		SceneSun = new RenderRef( CarScene, CarSun, "light for this scene" );
 
 		//CurrentCar.wakeUp();
 
-	// Reset at start
+		// Reset at start
 		ColorIDX = 0;
 		CurrentPage = 0;
 		CompleteCar = 0;
@@ -450,7 +450,7 @@ public class Catalog extends GameType implements GameState
 		osdCommand( CMD_VEH0 );// Show 1st car
 
 		//getInfo( GameType.GII_SIZE )/100.0, 1 );	//size, enableRotate
-		
+
 		CamThread = new Thread( this, "Cam Animate Refresher" );
 		CamThread.start();
 	}
@@ -491,7 +491,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Interior", CMD_MAIN4 );
 		m.addItem( "Audio", CMD_MAIN5 );
 		m.addItem( "Adesivos", CMD_MAIN6 );
-		
+
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
 		osd.createHotkey( Input.AXIS_CANCEL, Input.VIRTUAL, CMD_EXIT, this );
@@ -525,7 +525,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Sobrealimentacao", CMD_MAIN1_17 );
 		m.addItem( "Pro Tuning", CMD_MAIN1_18 );
 		m.addItem( "Motores Completos", CMD_MAIN1_19 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -540,7 +540,7 @@ public class Catalog extends GameType implements GameState
 
 		CurrentName = CurrentPage*10;
 
-		m = osd.createMenu( Menu_Center, 0.175, -0.655, Osd.MD_HORIZONTAL ); 
+		m = osd.createMenu( Menu_Center, 0.175, -0.655, Osd.MD_HORIZONTAL );
 		m.addItem( "Veiculos", CMD_VEHI );
 
 		m = osd.createMenu( Menu_Center, -0.175, -0.655, Osd.MD_HORIZONTAL );
@@ -569,7 +569,7 @@ public class Catalog extends GameType implements GameState
 		TotalText = osd.createText( "N/A", Frontend.smallFont, Text.ALIGN_RIGHT, 0.70, 0.70 ); TotalText.changeColor(0xFFF0F0F0);// "Unmolested" white
 
 		//osd.createText( "What you want to have today?", Frontend.smallFont, Text.ALIGN_CENTER, -0.45, 0.80 ).changeColor(0xFFF0F0F0);// "Unmolested" white
-		
+
 		osd.createText( "Escolha entre " + GameLogic.ChassisBox.size() + " diferentes modelos." , Frontend.smallFont, Text.ALIGN_CENTER, 0, 0.70 ).changeColor(0xFFF0F0F0);// "Unmolested" white
 
 		VehAmount = GameLogic.ChassisBox.size()-1;
@@ -586,12 +586,12 @@ public class Catalog extends GameType implements GameState
 		if( CurrentName + 8 <= VehAmount ) VehButton8 = m.addItem(GameLogic.ChassisBox.elementData[CurrentName+8].vehicleName, CMD_VEH8 ); else { VehButton8 = m.addItem( "", CMD_VEH8 ); VehButton0.disable(); }
 		if( CurrentName + 9 <= VehAmount ) VehButton9 = m.addItem(GameLogic.ChassisBox.elementData[CurrentName+9].vehicleName, CMD_VEH9 ); else { VehButton9 = m.addItem( "", CMD_VEH9 ); VehButton0.disable(); }
 
-		m = osd.createMenu( Menu_Button, -0.35,   -0.675, Osd.MD_VERTICAL ); 
+		m = osd.createMenu( Menu_Button, -0.35,   -0.675, Osd.MD_VERTICAL );
 		UpButton = m.addItem( new ResourceRef( frontend:0x00AFr ), CMD_UP, "Ant" );
-		
+
 		m = osd.createMenu( Menu_Button, -0.35,   0.675, Osd.MD_VERTICAL );
 		DownButton = m.addItem( new ResourceRef( frontend:0x0084r ), CMD_DOWN, "Prox" );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -612,7 +612,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Aerofolios", CMD_MAIN2_5 );
 		m.addItem( "Outros", CMD_MAIN2_6 );
 		m.addItem( "Body Kit", CMD_MAIN2_7 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -646,7 +646,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Aros 21''", CMD_MAIN3_16 );
 		m.addItem( "Aros 22''", CMD_MAIN3_17 );
 		m.addItem( "Aros Maiores ", CMD_MAIN3_18 );
-		
+
 		//------------------------------------------------------------------DEBUG(on the main running gear page)
 		/*m= osd.createMenu( Menu_Left, 0.00, -0.6, 0.133 );
 		m.addItem( "SMALLER TYRES", CMD_TYRE14 );
@@ -659,7 +659,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "TYRES 21''", CMD_TYRE21 );
 		m.addItem( "TYRES 22''", CMD_TYRE22 );
 		m.addItem( "BIGGER TYRES ", CMD_TYRE23 );*/
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -681,7 +681,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Pneus 21''", CMD_TYRE21 );
 		m.addItem( "Pneus 22''", CMD_TYRE22 );
 		m.addItem( "Pneus Maiores ", CMD_TYRE23 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_MAIN3, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -701,7 +701,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Bancos", CMD_MAIN4_6 );
 		m.addItem( "Santo Antonio", CMD_MAIN4_7 );
 		m.addItem( "Outros", CMD_MAIN4_8 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -719,7 +719,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Auto Falante", CMD_MAIN5_4 );
 		m.addItem( "Acessorios", CMD_MAIN5_5 );
 		m.addItem( "Kit De Som", CMD_MAIN5_6 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -738,7 +738,7 @@ public class Catalog extends GameType implements GameState
 		m.addItem( "Smiles", CMD_MAIN6_5 );
 		m.addItem( "Animais", CMD_MAIN6_6 );
 		m.addItem( "Outros", CMD_MAIN6_7 );
-		
+
 		osd.createButton( bek, 0.85, -0.94, CMD_FRONTPAGE, null );
 		osd.createButton( bex, 0.92, -0.94, CMD_EXIT, null );
 
@@ -878,7 +878,7 @@ public class Catalog extends GameType implements GameState
 		clearEventMask( EVENT_ANY );
 		removeAllTimers();
 		Input.cursor.enable(0);
-		
+
 		if(CurrentCar)
 		{
 			SceneSun.destroy();
@@ -927,7 +927,7 @@ public class Catalog extends GameType implements GameState
 
 	public void refreshMoneyString()
 	{
-		new SfxRef( Frontend.SFX_MONEY ).play(); 
+		new SfxRef( Frontend.SFX_MONEY ).play();
 		moneytxt.changeText( "$" + Integer.toString( player.money ) );
 	}
 
@@ -966,14 +966,14 @@ public class Catalog extends GameType implements GameState
 		}
 	}
 
-//----------------------------------------------------------------------
+	//----------------------------------------------------------------------
 	public void osdCommand( int cmd )
 	{
 		if( cmd == CMD_VCOLOR )
 		{
 			if(CurrentCar)
 			{
-				if( ColorIDX == GameLogic.CARCOLORS.length - 1) 
+				if( ColorIDX == GameLogic.CARCOLORS.length - 1)
 					ColorIDX = 0;
 				else
 					ColorIDX += 1;
@@ -987,12 +987,12 @@ public class Catalog extends GameType implements GameState
 		{
 			if( TotalP <= player.money )
 			{
-			// Create name: car name or chassis name
+				// Create name: car name or chassis name
 				String Vname;
 				if( CompleteCar > 0 ) Vname = CurrentCar.chassis.vehicleName;
 				else Vname = CurrentCar.chassis.name;
 
-			// Check for free space at garage
+				// Check for free space at garage
 				int	GarageFree;
 
 				if( GameLogic.player.car )
@@ -1001,8 +1001,8 @@ public class Catalog extends GameType implements GameState
 					GameLogic.player.carlot.lockPlayerCar();
 					GarageFree = GameLogic.player.carlot.getFreeSlot();
 					GameLogic.player.carlot.releasePlayerCar();
-					
-				//Reset car pos at garage
+
+					//Reset car pos at garage
 					GameLogic.garage.StartPos = new Vector3 (5.340, -2.2394, -1.144);
 					GameLogic.garage.StartYpr = new Ypr ( 2.525*(Math.random()*3.147), 0.000, 0.000);
 				}
@@ -1022,7 +1022,7 @@ public class Catalog extends GameType implements GameState
 						player.carlot.flushCars();
 
 						//CurrentCar.command( "start" );	//release
-						
+
 						if (File.exists("save/temp/CopyCar"))
 						{
 							File.delete( "save/temp/CopyCar" );
@@ -1039,14 +1039,14 @@ public class Catalog extends GameType implements GameState
 						GameLogic.changeActiveSection( GameLogic.garage );
 					}
 				}
-				else 
-				{ 
+				else
+				{
 					new WarningDialog( player.controller, Dialog.DF_MODAL|Dialog.DF_DEFAULTBG, "Lote De Carros Cheio", "Não há mais espaço livre no seu lote de carros. \n Venda alguns carros para liberar espaço no estacionamento!" ).display();
 				}
 			}
 			else
 			{
-					new WarningDialog( player.controller, Dialog.DF_MODAL|Dialog.DF_DEFAULTBG, "Sem Dinheiro", "Você não possui $" + TotalP + " para comprar este carro!" ).display();
+				new WarningDialog( player.controller, Dialog.DF_MODAL|Dialog.DF_DEFAULTBG, "Sem Dinheiro", "Você não possui $" + TotalP + " para comprar este carro!" ).display();
 			}
 		}
 		if( cmd == CMD_CHAS )
@@ -1064,13 +1064,13 @@ public class Catalog extends GameType implements GameState
 
 				CurrentCarName.changeText( CurrentCar.chassis.vehicleName );
 				CurrentCarDescription.changeText( CurrentCar.chassis.description );
-				
+
 				RetailP = CurrentCar.getTotalPrice()*PRICERATIO; // Clac retail price
 				RetailText.changeText( "$" + RetailP );// show text
 
 				DeliveryP = CurrentCar.chassis.getMass()*5.8; // Calc delivery price
 				DeliveryText.changeText( "$" + DeliveryP );// show text
-				
+
 				TotalP = RetailP + DeliveryP; // Calc total price
 				TotalText.changeText( "$" + TotalP );// show text
 
@@ -1095,7 +1095,7 @@ public class Catalog extends GameType implements GameState
 
 				DeliveryP = CurrentCar.chassis.getMass()*5.8; // Calc delivery price
 				DeliveryText.changeText( "$" + DeliveryP );// show text
-				
+
 				TotalP = RetailP + DeliveryP; // Calc total price
 				TotalText.changeText( "$" + TotalP );// show text
 
@@ -1128,7 +1128,7 @@ public class Catalog extends GameType implements GameState
 
 			Size = CurrentCar.chassis.getMin();
 			//Cam.command( "move " + CarScene.id() +" "+(Size.x*2.2)+","+(Size.y*2.2)+","+(Size.z*2.2)+" 1.0 0, -0.2, 0" );
-			
+
 			//Cam.setMatrix( new Vector3(-(Max.x-Min.x+1), Max.y, -(Max.z-Min.z+1)), new Ypr(-2.358, -0.5, 0));
 			//float size = CurrentCar.chassis.getInfo(GameType.GII_SIZE)/100.0;
 
@@ -1146,13 +1146,13 @@ public class Catalog extends GameType implements GameState
 
 			CurrentCarName.changeText( CurrentCar.chassis.vehicleName );
 			CurrentCarDescription.changeText( CurrentCar.chassis.description );
-			
+
 			RetailP = CurrentCar.getTotalPrice()*PRICERATIO; // Clac retail price
 			RetailText.changeText( "$" + RetailP );// show text
 
 			DeliveryP = CurrentCar.chassis.getMass()*5.8; // Calc delivery price
 			DeliveryText.changeText( "$" + DeliveryP );// show text
-			
+
 			TotalP = RetailP + DeliveryP; // Calc total price
 			TotalText.changeText( "$" + TotalP );// show text
 		}
@@ -1169,7 +1169,7 @@ public class Catalog extends GameType implements GameState
 
 			DownButton.changeTexture( new ResourceRef( frontend:0x0084r ) ); // Arrow down
 			DownButton.enable();
-			
+
 			if (CurrentPage == 0)
 			{
 				UpButton.changeTexture( new ResourceRef( frontend:0x00AFr ) ); // Empty.ptx
@@ -1398,323 +1398,323 @@ public class Catalog extends GameType implements GameState
 			}
 		}
 		else
-	// Collector filters:
-		if( cmd == NO_FILTER )
-		{
-			inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-			step--;
-		}
-		else
-		if( cmd == RIMS_FILTER )
-		{
-			Wheel rim = new Wheel();
-			rim = create( null, new GameRef(parts), "0,0,0,0,0,0,", "temp rim");
-
-			if( Rim_size <= 14 ) // Smaller rims
+			// Collector filters:
+			if( cmd == NO_FILTER )
 			{
-				if( rim.getRadius() <= 14)
+				inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+				step--;
+			}
+			else
+			if( cmd == RIMS_FILTER )
+			{
+				Wheel rim = new Wheel();
+				rim = create( null, new GameRef(parts), "0,0,0,0,0,0,", "temp rim");
+
+				if( Rim_size <= 14 ) // Smaller rims
 				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
+					if( rim.getRadius() <= 14)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
+				}
+				else
+				if( Rim_size >= 23 ) // Bigger rims
+				{
+					if( rim.getRadius() >= 23)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
+				}
+				else // 15"-22"
+				{
+					if( rim.getRadius() >= Rim_size && rim.getRadius() < Rim_size+1)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
 				}
 			}
 			else
-			if( Rim_size >= 23 ) // Bigger rims
+			if( cmd == TYRES_FILTER )
 			{
-				if( rim.getRadius() >= 23)
-				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
-				}
-			}
-			else // 15"-22"
-			{
-				if( rim.getRadius() >= Rim_size && rim.getRadius() < Rim_size+1)
-				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
-				}
-			}
-		}
-		else
-		if( cmd == TYRES_FILTER )
-		{
-			Tyre rubber = new Tyre();
-			rubber = create( null, new GameRef(parts), "0,0,0,0,0,0,", "temp rubber");
+				Tyre rubber = new Tyre();
+				rubber = create( null, new GameRef(parts), "0,0,0,0,0,0,", "temp rubber");
 
-			if( Tyre_size <= 14 ) // Smaller tyres
-			{
-				if( rubber.wheel_radius*2/25.4 <= 14)
+				if( Tyre_size <= 14 ) // Smaller tyres
 				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
+					if( rubber.wheel_radius*2/25.4 <= 14)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
+				}
+				else
+				if( Tyre_size >= 23 ) // Bigger tyres
+				{
+					if( rubber.wheel_radius*2/25.4 >= 23)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
+				}
+				else // 15"-22"
+				{
+					if( rubber.wheel_radius*2/25.4 >= Tyre_size && rubber.wheel_radius*2/25.4 < Tyre_size+1)
+					{
+						inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
+						step--;
+					}
 				}
 			}
 			else
-			if( Tyre_size >= 23 ) // Bigger tyres
-			{
-				if( rubber.wheel_radius*2/25.4 >= 23)
-				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
-				}
-			}
-			else // 15"-22"
-			{
-				if( rubber.wheel_radius*2/25.4 >= Tyre_size && rubber.wheel_radius*2/25.4 < Tyre_size+1)
-				{
-					inventory.items.addElement( new InventoryItem_Part( inventory, parts.id() ) );
-					step--;
-				}
-			}
-		}
-		else
-	// Parts collector buttons:
-		if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN3_18 ) // all parts pages buttons before CMD_TYRE1
-		//if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN6_1 ) // all parts pages buttons // original collector
-		{
-			collectObjectsBegin();
-			if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN2_1 ) //all engine part page
-			{
-				changeGroup( parts1Group );
-
-				if( cmd == CMD_MAIN1_1 )						//engine subsections
-				{
-					pageNumberPrefix="E-I/";
-					collectObjects( new GameRef(parts:0x025Cr) ); // Engine Blocks
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_2 )
-				{
-					pageNumberPrefix="E-II/";
-					collectObjects( new GameRef(parts:0x025Er) ); // Crankshafts & Bearning
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_3 )
-				{
-					pageNumberPrefix="E-III/";
-					collectObjects( new GameRef(parts:0x00B7r) ); // Connecting Rods
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_4 )
-				{
-					pageNumberPrefix="E-IV/";
-					collectObjects( new GameRef(parts:0x00B6r) ); // Pistons
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_5 )
-				{
-					pageNumberPrefix="E-V/";
-					collectObjects( new GameRef(parts:0x0252r) ); // Oil Pans
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_6 )
-				{
-					pageNumberPrefix="E-VI/";
-					collectObjects( new GameRef(parts:0x025Dr) ); // Cylinder Heads
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_7 )
-				{
-					pageNumberPrefix="E-VII/";
-					collectObjects(  new GameRef(parts:0x025Fr) ); // Intake & Exhaust Crankshafts
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_8 )
-				{
-					pageNumberPrefix="E-VIII/";
-					collectObjects( new GameRef(parts:0x0255r), new GameRef(parts:0x026Fr) ); // Air Delivery
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN1_9 )
-				{
-					pageNumberPrefix="E-IX/";
-					collectObjects( new GameRef(parts:0x026Br), new GameRef(parts:0x026Er) ); // Fuel Delivery
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_10 )
-				{
-					pageNumberPrefix="E-X/";
-					collectObjects( new GameRef(parts:0x0249r), new GameRef(parts:0x023Cr) ); // Clutchs & Flywheels
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_11 )
-				{
-					pageNumberPrefix="E-XI/";
-					collectObjects( new GameRef(parts:0x024Ar), new GameRef(parts:0x023Br) ); // Transmission & Drivetrain
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_12 )
-				{
-					pageNumberPrefix="E-XII/";
-					collectObjects( new GameRef(parts:0x0282r), new GameRef(parts:0x0250r) ); // Exhaust System
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_13 )
-				{
-					pageNumberPrefix="E-XIII/";
-					collectObjects( new GameRef(parts:0x00C9r) ); // Exhaust Tips
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_14 )
-				{
-					pageNumberPrefix="E-XIIV/";
-					collectObjects( new GameRef(parts:0x00BEr) ); // Drive Belts
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_15 )
-				{
-					pageNumberPrefix="E-XIV/";
-					collectObjects( new GameRef(parts:0x0012r) ); // Accesories & Others
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_16 )
-				{
-					pageNumberPrefix="E-XV/";
-					collectObjects( new GameRef(parts:0x0010r) ); // Batteries
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_17 )
-				{
-					pageNumberPrefix="E-XVI/";
-					collectObjects( new GameRef(parts:0x00BDr), new GameRef(parts:0x0281r), new GameRef(parts:0x0279r) ); // Charging System
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_18 )
-				{
-					pageNumberPrefix="E-XVII/";
-					collectObjects( new GameRef(parts:0xF27Dr), new GameRef(parts:0x0117r), new GameRef(parts:0x00B4r), new GameRef(parts:0x0277r) ); // Pro tunning
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN1_19 )
-				{
-					pageNumberPrefix="E-XVIII/";
-					collectObjects( new GameRef(parts:0xF23Cr) ); // Engine Kits
-					filter = NO_FILTER;
-				}
-			}
-			else
-			if( cmd >= CMD_MAIN2_1 && cmd < CMD_MAIN3_1 )		//body subs
-			{
-				changeGroup( parts2Group );
-				if( cmd == CMD_MAIN2_1 )					
-				{
-					pageNumberPrefix="B-I/";
-					collectObjects( new GameRef(parts:0xF242r) ); // Body Panels
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_2 )					
-				{
-					pageNumberPrefix="B-II/";
-					collectObjects( new GameRef(parts:0xF24Fr) ); // Replacement Parts
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_3 )					
-				{
-					pageNumberPrefix="B-III/";
-					collectObjects( new GameRef(parts:0xF24cr) ); // Lights & Windows
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_4 )				
-				{
-					pageNumberPrefix="B-IV/";
-					collectObjects( new GameRef(parts:0xF24Br), new GameRef(parts:0xF266r) ); // Neon Lights
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_5 )				
-				{
-					pageNumberPrefix="B-V/";
-					collectObjects( new GameRef(parts:0xF233r) ); // Areodynamic Tunning
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_6 )				
-				{
-					pageNumberPrefix="B-VI/";
-					collectObjects( new GameRef(parts:0xF228r) ); // Others
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN2_7 )				
-				{
-					pageNumberPrefix="B-VII/";
-					collectObjects( new GameRef(parts:0xF23Br) ); // Body Kits
-					filter = NO_FILTER;
-				}
-			}
-			//------------------------------------------------------------------
-			if( cmd >= CMD_MAIN3_1 && cmd <= CMD_MAIN3_18 )
-			{
-				changeGroup( parts3Group );
-
-				if( cmd >= CMD_MAIN3_9 && cmd <= CMD_MAIN3_18 )	//all Rims buttons
+				// Parts collector buttons:
+				if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN3_18 ) // all parts pages buttons before CMD_TYRE1
+				//if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN6_1 ) // all parts pages buttons // original collector
 				{
 					collectObjectsBegin();
-					collectObjects( new GameRef(parts:0xF235r) );
-					filter = RIMS_FILTER;
+					if( cmd >= CMD_MAIN1_1 && cmd < CMD_MAIN2_1 ) //all engine part page
+					{
+						changeGroup( parts1Group );
 
-					int buttonNumber;
+						if( cmd == CMD_MAIN1_1 )						//engine subsections
+						{
+							pageNumberPrefix="E-I/";
+							collectObjects( new GameRef(parts:0x025Cr) ); // Engine Blocks
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_2 )
+						{
+							pageNumberPrefix="E-II/";
+							collectObjects( new GameRef(parts:0x025Er) ); // Crankshafts & Bearning
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_3 )
+						{
+							pageNumberPrefix="E-III/";
+							collectObjects( new GameRef(parts:0x00B7r) ); // Connecting Rods
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_4 )
+						{
+							pageNumberPrefix="E-IV/";
+							collectObjects( new GameRef(parts:0x00B6r) ); // Pistons
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_5 )
+						{
+							pageNumberPrefix="E-V/";
+							collectObjects( new GameRef(parts:0x0252r) ); // Oil Pans
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_6 )
+						{
+							pageNumberPrefix="E-VI/";
+							collectObjects( new GameRef(parts:0x025Dr) ); // Cylinder Heads
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_7 )
+						{
+							pageNumberPrefix="E-VII/";
+							collectObjects(  new GameRef(parts:0x025Fr) ); // Intake & Exhaust Crankshafts
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_8 )
+						{
+							pageNumberPrefix="E-VIII/";
+							collectObjects( new GameRef(parts:0x0255r), new GameRef(parts:0x026Fr) ); // Air Delivery
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN1_9 )
+						{
+							pageNumberPrefix="E-IX/";
+							collectObjects( new GameRef(parts:0x026Br), new GameRef(parts:0x026Er) ); // Fuel Delivery
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_10 )
+						{
+							pageNumberPrefix="E-X/";
+							collectObjects( new GameRef(parts:0x0249r), new GameRef(parts:0x023Cr) ); // Clutchs & Flywheels
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_11 )
+						{
+							pageNumberPrefix="E-XI/";
+							collectObjects( new GameRef(parts:0x024Ar), new GameRef(parts:0x023Br) ); // Transmission & Drivetrain
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_12 )
+						{
+							pageNumberPrefix="E-XII/";
+							collectObjects( new GameRef(parts:0x0282r), new GameRef(parts:0x0250r) ); // Exhaust System
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_13 )
+						{
+							pageNumberPrefix="E-XIII/";
+							collectObjects( new GameRef(parts:0x00C9r) ); // Exhaust Tips
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_14 )
+						{
+							pageNumberPrefix="E-XIIV/";
+							collectObjects( new GameRef(parts:0x00BEr) ); // Drive Belts
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_15 )
+						{
+							pageNumberPrefix="E-XIV/";
+							collectObjects( new GameRef(parts:0x0012r) ); // Accesories & Others
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_16 )
+						{
+							pageNumberPrefix="E-XV/";
+							collectObjects( new GameRef(parts:0x0010r) ); // Batteries
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_17 )
+						{
+							pageNumberPrefix="E-XVI/";
+							collectObjects( new GameRef(parts:0x00BDr), new GameRef(parts:0x0281r), new GameRef(parts:0x0279r) ); // Charging System
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_18 )
+						{
+							pageNumberPrefix="E-XVII/";
+							collectObjects( new GameRef(parts:0xF27Dr), new GameRef(parts:0x0117r), new GameRef(parts:0x00B4r), new GameRef(parts:0x0277r) ); // Pro tunning
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN1_19 )
+						{
+							pageNumberPrefix="E-XVIII/";
+							collectObjects( new GameRef(parts:0xF23Cr) ); // Engine Kits
+							filter = NO_FILTER;
+						}
+					}
+					else
+					if( cmd >= CMD_MAIN2_1 && cmd < CMD_MAIN3_1 )		//body subs
+					{
+						changeGroup( parts2Group );
+						if( cmd == CMD_MAIN2_1 )
+						{
+							pageNumberPrefix="B-I/";
+							collectObjects( new GameRef(parts:0xF242r) ); // Body Panels
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_2 )
+						{
+							pageNumberPrefix="B-II/";
+							collectObjects( new GameRef(parts:0xF24Fr) ); // Replacement Parts
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_3 )
+						{
+							pageNumberPrefix="B-III/";
+							collectObjects( new GameRef(parts:0xF24cr) ); // Lights & Windows
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_4 )
+						{
+							pageNumberPrefix="B-IV/";
+							collectObjects( new GameRef(parts:0xF24Br), new GameRef(parts:0xF266r) ); // Neon Lights
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_5 )
+						{
+							pageNumberPrefix="B-V/";
+							collectObjects( new GameRef(parts:0xF233r) ); // Areodynamic Tunning
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_6 )
+						{
+							pageNumberPrefix="B-VI/";
+							collectObjects( new GameRef(parts:0xF228r) ); // Others
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN2_7 )
+						{
+							pageNumberPrefix="B-VII/";
+							collectObjects( new GameRef(parts:0xF23Br) ); // Body Kits
+							filter = NO_FILTER;
+						}
+					}
+					//------------------------------------------------------------------
+					if( cmd >= CMD_MAIN3_1 && cmd <= CMD_MAIN3_18 )
+					{
+						changeGroup( parts3Group );
 
-					if( cmd == CMD_MAIN3_9 ) buttonNumber = 14; // Smaller than 15"
-					if( cmd == CMD_MAIN3_10 ) buttonNumber = 15;
-					if( cmd == CMD_MAIN3_11 ) buttonNumber = 16;
-					if( cmd == CMD_MAIN3_12 ) buttonNumber = 17;
-					if( cmd == CMD_MAIN3_13 ) buttonNumber = 18;
-					if( cmd == CMD_MAIN3_14 ) buttonNumber = 19;
-					if( cmd == CMD_MAIN3_15 ) buttonNumber = 20;
-					if( cmd == CMD_MAIN3_16 ) buttonNumber = 21;
-					if( cmd == CMD_MAIN3_17 ) buttonNumber = 22;
-					if( cmd == CMD_MAIN3_18 ) buttonNumber = 23; // Bigger than 22"
+						if( cmd >= CMD_MAIN3_9 && cmd <= CMD_MAIN3_18 )	//all Rims buttons
+						{
+							collectObjectsBegin();
+							collectObjects( new GameRef(parts:0xF235r) );
+							filter = RIMS_FILTER;
 
-					Rim_size = buttonNumber; // Info for RIMS_FILTER
-					pageNumberPrefix="R-R"+buttonNumber+"''/";
-				}
-				else
-				if( cmd == CMD_MAIN3_1 )	//running gear subsections
-				{
-					pageNumberPrefix="R-I/";
-					collectObjects( new GameRef(parts:0xF229r) ); // Suspension
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN3_2 )
-				{
-					pageNumberPrefix="R-II/";
-					collectObjects( new GameRef(parts:0x001Cr) ); // Shock Absorbers
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN3_3 )
-				{
-					pageNumberPrefix="R-III/";
-					collectObjects( new GameRef(parts:0xF22Ar) ); // Springs
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN3_4 )
-				{
-					pageNumberPrefix="R-IV/";
-					collectObjects( new GameRef(parts:0xF22Dr) ); // Brakes
-					filter = NO_FILTER;
-				}
-				//------------------------------------------------------------------Ex-MAIN INSTANCE(gives odd problems, dont even bother to try it since the above works finely already lol)
+							int buttonNumber;
+
+							if( cmd == CMD_MAIN3_9 ) buttonNumber = 14; // Smaller than 15"
+							if( cmd == CMD_MAIN3_10 ) buttonNumber = 15;
+							if( cmd == CMD_MAIN3_11 ) buttonNumber = 16;
+							if( cmd == CMD_MAIN3_12 ) buttonNumber = 17;
+							if( cmd == CMD_MAIN3_13 ) buttonNumber = 18;
+							if( cmd == CMD_MAIN3_14 ) buttonNumber = 19;
+							if( cmd == CMD_MAIN3_15 ) buttonNumber = 20;
+							if( cmd == CMD_MAIN3_16 ) buttonNumber = 21;
+							if( cmd == CMD_MAIN3_17 ) buttonNumber = 22;
+							if( cmd == CMD_MAIN3_18 ) buttonNumber = 23; // Bigger than 22"
+
+							Rim_size = buttonNumber; // Info for RIMS_FILTER
+							pageNumberPrefix="R-R"+buttonNumber+"''/";
+						}
+						else
+						if( cmd == CMD_MAIN3_1 )	//running gear subsections
+						{
+							pageNumberPrefix="R-I/";
+							collectObjects( new GameRef(parts:0xF229r) ); // Suspension
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN3_2 )
+						{
+							pageNumberPrefix="R-II/";
+							collectObjects( new GameRef(parts:0x001Cr) ); // Shock Absorbers
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN3_3 )
+						{
+							pageNumberPrefix="R-III/";
+							collectObjects( new GameRef(parts:0xF22Ar) ); // Springs
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN3_4 )
+						{
+							pageNumberPrefix="R-IV/";
+							collectObjects( new GameRef(parts:0xF22Dr) ); // Brakes
+							filter = NO_FILTER;
+						}
+						//------------------------------------------------------------------Ex-MAIN INSTANCE(gives odd problems, dont even bother to try it since the above works finely already lol)
 				/*else
 				if( cmd == CMD_TYRE1 )
-				{	
+				{
 					changeGroup( main7Group );
-				
+
 					if( cmd >= CMD_TYRE14 && cmd <= CMD_TYRE23 )	//all Tyres buttons
 					{
 						collectObjects( new GameRef(parts:0xF23Er) );
@@ -1737,31 +1737,31 @@ public class Catalog extends GameType implements GameState
 						pageNumberPrefix="R-V"+buttonNumber+"''/";
 					}
 				}*/
-				else
-				if( cmd == CMD_MAIN3_6 )
-				{
-					pageNumberPrefix="R-VI/";
-					collectObjects( new GameRef(parts:0xD120r), new GameRef(parts:0xD121r) ); // Others
-					filter = NO_FILTER;
-				}
-				else
-				if( cmd == CMD_MAIN3_7 )
-				{
-					pageNumberPrefix="R-VII/";
-					collectObjects( new GameRef(parts:0x021Fr) ); // Sway Bars
-					filter = NO_FILTER;
-				}
-				if( cmd == CMD_MAIN3_8 )
-				{
-					pageNumberPrefix="R-VIII/";
-					collectObjects( new GameRef(parts:0xF249r) ); // RG kits
-					filter = NO_FILTER;
-				}
-			}
+						else
+						if( cmd == CMD_MAIN3_6 )
+						{
+							pageNumberPrefix="R-VI/";
+							collectObjects( new GameRef(parts:0xD120r), new GameRef(parts:0xD121r) ); // Others
+							filter = NO_FILTER;
+						}
+						else
+						if( cmd == CMD_MAIN3_7 )
+						{
+							pageNumberPrefix="R-VII/";
+							collectObjects( new GameRef(parts:0x021Fr) ); // Sway Bars
+							filter = NO_FILTER;
+						}
+						if( cmd == CMD_MAIN3_8 )
+						{
+							pageNumberPrefix="R-VIII/";
+							collectObjects( new GameRef(parts:0xF249r) ); // RG kits
+							filter = NO_FILTER;
+						}
+					}
 
-			collectObjectsEnd();
-			refreshPage();
-		}
+					collectObjectsEnd();
+					refreshPage();
+				}
 
 		if( cmd >= CMD_TYRE14 && cmd < CMD_MAIN6_1 ) // all parts pages buttons after CMD_TYRE1
 		{
@@ -1853,7 +1853,7 @@ public class Catalog extends GameType implements GameState
 			if( cmd >= CMD_MAIN5_1 && cmd < CMD_MAIN6_1 ) //audio subsection
 			{
 				changeGroup( parts5Group );
-				if( cmd == CMD_MAIN5_1 )				
+				if( cmd == CMD_MAIN5_1 )
 				{
 					pageNumberPrefix="A-I/";
 					collectObjects( new GameRef(parts:0xF240r) );	//head units
@@ -1900,12 +1900,12 @@ public class Catalog extends GameType implements GameState
 			refreshPage();
 		}
 	}
-	
+
 	public void run()
 	{
 		for(;;)
 		{
-			CamYpr = new Ypr( -0.01f+System.currentTime()*0.5f,-0.15,0 ); 
+			CamYpr = new Ypr( -0.01f+System.currentTime()*0.5f,-0.15,0 );
 			CamVector = new Vector3( 0.0, 1.5, 8.5 );
 			CamVector.rotate( CamYpr );
 			CamYpr.p = -0.23;
@@ -1932,7 +1932,7 @@ public class CatalogInventory extends VisualInventory
 		super(player, left, top, width, height );
 		catalog=cat;
 	}
-		
+
 	public void initVisuals( float left, float top, float width, float height  )
 	{
 		linesPerPage=2;
@@ -1947,7 +1947,7 @@ public class CatalogInventory extends VisualInventory
 		float	itemWidth=0.20, itemHeight=0.15;
 		float	hSpacing = (width-itemWidth*partsPerLine)/partsPerLine;
 		float	vSpacing = (height-itemHeight*linesPerPage)/(linesPerPage-1);
-		
+
 		//backObject = new RenderRef( misc.catalog:0x00000020r );
 		panels=new InventoryPanel[partsPerLine*linesPerPage];
 		names=new TextBox[panels.length];
@@ -1966,7 +1966,7 @@ public class CatalogInventory extends VisualInventory
 				if( j == partsPerLine/2 )
 					cwidth+=hSpacing;
 
-				index = i*partsPerLine+j; 
+				index = i*partsPerLine+j;
 				panels[index]=new CatalogInventoryPanel( this, index, cwidth, cheight, itemWidth, itemHeight, player );
 				names[index]=osd.createTextBox( null, Frontend.smallFont, Text.ALIGN_CENTER, (cwidth)*2-1, ((cheight+itemHeight)*2)-1, itemWidth*2 );
 				//kicsit patch, sajnos a fontnak nics olyan propertyje, hogy multicolor-e!
@@ -2006,7 +2006,7 @@ public class CatalogInventory extends VisualInventory
 	{
 		if( items.size() > 1)
 			return (items.size()-1)/(partsPerLine*linesPerPage)+1;
-			
+
 		return 1;
 	}
 
@@ -2154,7 +2154,7 @@ public class CatalogInventoryPanel extends InventoryPanel
 
 			if( compatibleParts )
 				infoTex1 = Catalog.RR_ICON_INV_COMP;
-			
+
 		}
 
 		infoRect0.changeTexture( infoTex0 );
@@ -2187,7 +2187,7 @@ public class BuyCatalogItemDialog extends YesNoDialog
 	public String genBody( InventoryItem item, int price )
 	{
 		String body = "Deseja Comprar " + item.getName()  + " Por $" + price + " ? \n \n \n" + item.getDescription() + " \n \n Nota: ";
-//		String body = "Deseja Comprar " + item.getName()  + " Por $" + price + " ? \n \n Note: ";		
+//		String body = "Deseja Comprar " + item.getName()  + " Por $" + price + " ? \n \n Note: ";
 
 		if( item instanceof InventoryItem_Part )
 		{
@@ -2212,11 +2212,11 @@ public class BuyCatalogItemDialog extends YesNoDialog
 
 		return body;
 	}
-	
+
 	public void show()
 	{
 		if (invItem instanceof InventoryItem_Folder)
-		{	
+		{
 			cam = new Camera( invItem.localroot, panelosd.getViewport(), 1, 75, 0.001, 10.0 );
 			Vector3 camPos = new Vector3( 0.0, staticYZ, staticYZ );
 			camPos.rotate( new Ypr( ypr.y, 0.0, 0.0 ) );
@@ -2242,13 +2242,13 @@ public class BuyCatalogItemDialog extends YesNoDialog
 	public void hide()
 	{
 		clearEventMask( EVENT_ANY );
-		
+
 		if( spinnerThread )
 		{
 			spinnerThread.stop();
 			spinnerThread=null;
 		}
-		
+
 		if( light )
 		{
 			light.destroy();
@@ -2260,9 +2260,9 @@ public class BuyCatalogItemDialog extends YesNoDialog
 			cam.destroy();	//stop rendering right now
 			light = null;
 		}
-		
+
 		panelosd.hide();
-		
+
 		super.hide();
 	}
 
@@ -2274,7 +2274,7 @@ public class BuyCatalogItemDialog extends YesNoDialog
 			if( cam )
 			{
 				if (invItem instanceof InventoryItem_Folder)
-				{	
+				{
 					ypr.y+=0.03;
 					Vector3 v = new Vector3( 0.0, 0.5, staticYZ );
 					v.rotate( new Ypr( ypr.y, 0.0, 0.0 ) );
